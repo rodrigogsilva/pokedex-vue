@@ -1,0 +1,23 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo 'Project Validation before committing'
+
+# Check Prettier standards
+npm run check-format ||
+(
+        echo 'The code is not following the project styling.
+                Prettier Check Failed. Run npm run format, add changes and try commit again.';
+        false;
+)
+
+# Check ESLint Standards
+npm run check-lint ||
+(
+        echo 'The code is not following the project linting.
+                ESLint Check Failed. Run npm run lin, add changes and try to commit again.'
+        false;
+)
+
+# If everything passes... Now we can commit
+echo 'Validation completed. Committing now.'
