@@ -1,7 +1,6 @@
 <template>
   <div class="spin">
     <v-progress-circular
-      class="ring"
       :size="256"
       :width="20"
       color="dark-grey"
@@ -16,19 +15,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .spin {
   z-index: 999;
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
-}
 
-.ring {
-  position: absolute;
-  top: 40%;
-  left: 40%;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
