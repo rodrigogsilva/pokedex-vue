@@ -7,7 +7,7 @@
 
 # Pokedex
 
-TODO: escrever descrição do projeto
+Implementação da api [pokeapi](https://pokeapi.co) para mostrar os pokemons e seus status.
 
 ## Demo
 
