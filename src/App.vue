@@ -1,28 +1,33 @@
 <template>
-  <v-app>
-    <v-app-bar app color="primary" dark>
-      <h1>Pokedex</h1>
-    </v-app-bar>
-
-    <v-main>
-      <p>stuiff goes here</p>
-    </v-main>
+  <v-app
+    id="inspire"
+    style="background: linear-gradient(to bottom left, #90caf9, #eeff41)"
+  >
+    <Spinner v-show="show" />
+    <Header />
+    <poke-list />
   </v-app>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
+<script>
+import { mapGetters } from "vuex";
 
-export default Vue.extend({
+import Header from "./components/Header.vue";
+import PokeList from "./components/PokeList.vue";
+import Spinner from "./components/Spinner.vue";
+
+export default {
   name: "App",
-
-  components: {},
-
-  data: () => ({
-    //
-  }),
-  created: () => {
-    document.title = "Pokedex | Home";
+  components: { Header, PokeList, Spinner },
+  methods: {
+    ...mapGetters(["isLoading"]),
   },
-});
+  computed: {
+    show() {
+      return this.isLoading();
+    },
+  },
+};
 </script>
+
+<style></style>
