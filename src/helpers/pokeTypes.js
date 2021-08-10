@@ -79,6 +79,6 @@ const types = {
     name: "Sombra",
     color: "#70559B",
   },
-},;
+};
 
 export default types;
