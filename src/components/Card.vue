@@ -6,7 +6,7 @@
           <div class="card__header">
             <img
               class="card__picture pa-2"
-              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${idx}.svg`"
+              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`"
               alt="Pokemon picture"
             />
           </div>
@@ -14,8 +14,8 @@
         <div class="card__details">
           <p class="card__details--number">#{{ pokeNumber }}</p>
           <ul>
-            <li>Name: CHANGE THIS</li>
-            <li>Type: CHANGE TYPES</li>
+            <li>Name: {{ pokemon.name }}</li>
+            <li>Type: {{ pokeTypes }}</li>
           </ul>
         </div>
       </div>
@@ -25,11 +25,11 @@
           <div class="card__status-box">
             <p class="card__status-title">Status</p>
             <ul>
-              <li>Status thinging 1</li>
-              <li>Status thinging 2</li>
-              <li>Status thinging 3</li>
-              <li>Status thinging 4</li>
-              <li>Status thinging 5</li>
+              <card-details
+                v-for="(stat, idx) in pokemon.stats"
+                :key="idx"
+                :status="stat"
+              />
             </ul>
           </div>
         </div>
@@ -39,19 +39,31 @@
 </template>
 
 <script>
+import types from "../helpers/pokeTypes";
+import CardDetails from "./CardDetails.vue";
+
 export default {
+  components: { CardDetails },
   name: "Card",
   props: {
-    idx: Number,
+    pokemon: Object,
   },
   computed: {
     pokeNumber() {
-      return this.idx.toString().padStart(3, "0");
+      return this.pokemon.id.toString().padStart(3, "0");
     },
     cardColor() {
+      const type = this.pokemon.types.map((t) => t.type.name)[0];
+      const color = types[type];
+
       return {
-        "background-color": `rgb(130, ${Math.random() * 255}, 90)`,
+        "background-color": color,
       };
+    },
+    pokeTypes() {
+      const poke_types = this.pokemon.types.map((t) => t.type.name);
+
+      return poke_types.join(" | ");
     },
   },
 };
@@ -66,7 +78,7 @@ export default {
   &__side {
     border: 0.5rem solid #fff;
     height: 23rem;
-    transition: all 0.8s ease;
+    transition: all 2s ease;
     position: absolute;
     top: 0;
     left: 0;
@@ -109,11 +121,12 @@ export default {
       padding: 1.25rem;
       background-color: rgba(255, 255, 255, 0.6);
       border-radius: 1rem;
+      text-transform: capitalize;
     }
 
     &--number {
       text-align: center;
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.6);
       padding: 0.5rem 1rem;
       border-radius: 1rem;
     }
@@ -136,6 +149,7 @@ export default {
 
     ul {
       list-style: none;
+      text-transform: capitalize;
     }
 
     li:not(:first-child) {

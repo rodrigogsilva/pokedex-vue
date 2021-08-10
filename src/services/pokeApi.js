@@ -1,9 +1,9 @@
 import { api } from "./api";
 
-export async function loadPokemon(offset = 0, limit = 18) {
-  const { data } = await api.get(`?offset=${offset}&limit=${limit}`);
-
-  return data;
+export async function loadPokemons(nextUrl) {
+  return nextUrl
+    ? (await api.get(nextUrl)).data
+    : (await api.get(`?offset=0&limit=18`)).data;
 }
 
 export async function loadPokemonData(pokemonName) {
