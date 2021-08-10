@@ -3,7 +3,7 @@ import { api } from "./api";
 export async function loadPokemons(nextUrl) {
   return nextUrl
     ? (await api.get(nextUrl)).data
-    : (await api.get(`?offset=0&limit=18`)).data;
+    : (await api.get(`?offset=0&limit=30`)).data;
 }
 
 export async function loadPokemonData(pokemonName) {

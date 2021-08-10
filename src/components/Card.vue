@@ -166,9 +166,12 @@ export default {
   @media only screen and (max-width: 48em), only screen and (hover: none) {
     height: auto;
     background-color: #fff;
+    border-radius: 1rem;
+    border: 0.5rem solid #fff;
     box-shadow: 0 1rem 2.5rem rgba(#000, 0.15);
 
     &__side {
+      border: none;
       height: auto;
       position: relative;
       border-radius: 3px;
@@ -193,7 +196,7 @@ export default {
       left: 0;
       transform: translate(0);
       width: 100%;
-      padding: 7rem 4rem 4rem 4rem;
+      padding: 2rem;
     }
 
     &__status-box {

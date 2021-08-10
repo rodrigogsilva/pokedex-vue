@@ -19,22 +19,25 @@ export default {
   name: "PokeList",
   components: { Card },
   async beforeMount() {
+    this.setLoading(true);
     await this.fetchPokemons();
-    console.log(this.pokemonList());
+    this.setLoading(false);
   },
   mounted() {
     this.getNextPokemon();
   },
   methods: {
     ...mapGetters(["nextUrl", "pokemonList"]),
-    ...mapActions(["fetchPokemons"]),
+    ...mapActions(["fetchPokemons", "setLoading"]),
     getNextPokemon() {
-      window.onscroll = () => {
+      window.onscroll = async () => {
         let bottomOfWindow =
           document.documentElement.scrollTop + window.innerHeight ===
           document.documentElement.offsetHeight;
         if (bottomOfWindow) {
-          this.fetchPokemons();
+          this.setLoading(true);
+          await this.fetchPokemons();
+          this.setLoading(false);
         }
       };
     },
