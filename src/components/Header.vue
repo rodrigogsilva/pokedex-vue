@@ -1,13 +1,7 @@
 <template>
   <v-app-bar app dense color="#90caf9">
     <v-spacer></v-spacer>
-    <img
-      src="@/assets/logo_pokedex.png"
-      alt="logo pokedex"
-      class="logo"
-      height="259"
-      width="467"
-    />
+    <img src="@/assets/logo_pokedex.png" alt="logo pokedex" class="logo" />
     <v-spacer></v-spacer>
   </v-app-bar>
 </template>
