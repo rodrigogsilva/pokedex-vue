@@ -11,3 +11,7 @@ export async function loadPokemonData(pokemonName) {
 
   return data;
 }
+
+export async function findPokemon(pokemon) {
+  return (await api.get(`/${pokemon}`)).data;
+}

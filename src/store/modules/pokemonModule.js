@@ -1,4 +1,8 @@
-import { loadPokemons, loadPokemonData } from "../../services/pokeApi";
+import {
+  loadPokemons,
+  loadPokemonData,
+  findPokemon,
+} from "../../services/pokeApi";
 
 export const state = {
   pokemon: [],
@@ -29,12 +33,21 @@ export const actions = {
     commit("SET_NEXT_URL", data.next);
 
     const pokemonsDetails = await Promise.all(
-      data.results.map(async (pokemon) => {
-        const response = await loadPokemonData(pokemon.name);
-        return response;
-      })
+      data.results.map(async (pokemon) => await loadPokemonData(pokemon.name))
     );
 
     commit("SET_POKEMON", [...state.pokemon, ...pokemonsDetails]);
+  },
+
+  async searchPokemon({ commit }, pokemon) {
+    commit("SET_NEXT_URL", "");
+
+    try {
+      const data = await findPokemon(pokemon);
+
+      commit("SET_POKEMON", [data]);
+    } catch (error) {
+      commit("SET_POKEMON", []);
+    }
   },
 };

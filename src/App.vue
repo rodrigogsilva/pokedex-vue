@@ -5,6 +5,7 @@
   >
     <Spinner v-show="show" />
     <Header />
+    <poke-search style="padding-top: 3rem" />
     <poke-list />
   </v-app>
 </template>
@@ -14,11 +15,12 @@ import { mapGetters } from "vuex";
 
 import Header from "./components/Header.vue";
 import PokeList from "./components/PokeList.vue";
+import PokeSearch from "./components/PokeSearch.vue";
 import Spinner from "./components/Spinner.vue";
 
 export default {
   name: "App",
-  components: { Header, PokeList, Spinner },
+  components: { Header, PokeList, PokeSearch, Spinner },
   methods: {
     ...mapGetters(["isLoading"]),
   },
