@@ -44,8 +44,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.list__main {
-  padding-top: 5rem;
-}
-</style>
