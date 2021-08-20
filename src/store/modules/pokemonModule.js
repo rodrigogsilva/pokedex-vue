@@ -33,7 +33,7 @@ export const actions = {
     commit("SET_NEXT_URL", data.next);
 
     const pokemonsDetails = await Promise.all(
-      data.results.map(async (pokemon) => await loadPokemonData(pokemon.name))
+      data.results.map(async (pokemon) => loadPokemonData(pokemon.name))
     );
 
     commit("SET_POKEMON", [...state.pokemon, ...pokemonsDetails]);
@@ -41,6 +41,7 @@ export const actions = {
 
   async searchPokemon({ commit }, pokemon) {
     commit("SET_NEXT_URL", "");
+    commit("SET_POKEMON", []);
 
     try {
       const data = await findPokemon(pokemon);
